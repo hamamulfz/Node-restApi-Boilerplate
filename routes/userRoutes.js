@@ -19,4 +19,7 @@ module.exports = Express.Router({
   .post(`${BASE_URL}/signup`, Controller.signup)
   .put(`${BASE_URL}/:password`, BearerAuthorization, Controller.updatePassword)
   .get(`${BASE_URL}/signout/`, BearerAuthorization, Controller.signOut)
-  .post(`${BASE_URL}/fbsignuporlogin`, Controller.fbSignUpOrLogin);
+  .post(`${BASE_URL}/fbauth`, Controller.fbSignUpOrLogin)
+  .get(`test`, function(req, res) {
+    res.send("hello world");
+  });

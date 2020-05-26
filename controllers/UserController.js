@@ -139,6 +139,7 @@ exports.showUser = async (req, res, next) => {
   // }
   response.responseSuccess(data, res);
 };
+
 // signOut need Bearer Token
 exports.signOut = async (req, res, next) => {
   console.log("sign Out");
