@@ -6,8 +6,14 @@ var identity = require("../components/identity");
 const { todo  } = require("../models/index");
 
 exports.getAll = async function(req, res, next) {
+  let created_by = identity.getId();
+  
   await todo
-    .findAll()
+    .findAll({
+      where: {
+        created_by: created_by
+      }
+    })
     .then(function(task) {
       if (!task) {
         response.responseNotFound("", "incorrect task name", res);
