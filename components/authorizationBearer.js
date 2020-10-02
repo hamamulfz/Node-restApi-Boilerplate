@@ -29,6 +29,8 @@ module.exports = async (req, res, next) => {
       console.log("scheme 1: " + scheme);
       console.log("token 1: " + token);
       let validToken = await user.findIdentityByTokenBearer(token);
+      // return res.status(401).json({data: validToken});
+
       // console.log(validToken);
       if (!validToken) {
         console.log("token: not exist in db");
@@ -38,8 +40,13 @@ module.exports = async (req, res, next) => {
       identity.setUsername(validToken.username);
       identity.setEmail(validToken.email);
       next();
+    } else {
+      console.log("token: no token");
+      response.responseUnauthorize("", "", res);
     }
+  } else {
+
+    console.log("token: no token");
+    response.responseUnauthorize("", "", res);
   }
-  console.log("token: no token");
-  response.responseUnauthorize("", "", res);
 };
